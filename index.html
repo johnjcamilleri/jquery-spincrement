@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>jq-spincrement demo</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="jquery.spincrement.js"></script>
+		<style type="text/css">
+			.spincrement { display: inline-block; background-color: lemonchiffon; padding: .5em; text-align: center;  }
+		</style>
+	</head>
+	<body>
+		<h1>jq-spincrement demo</h1>
+		Spinners:
+			<div class="spincrement">95</div>&nbsp;
+			<div class="spincrement">16060606</div>&nbsp;
+			<div class="spincrement">1.56</div>&nbsp;
+			<div class="spincrement">0.4956</div>&nbsp;
+			<div class="spincrement">-2.35</div>&nbsp;
+		
+		<script type="text/javascript">
+			$(document).ready(function (){
+				$('.spincrement').spincrement({
+					from: 0.0,
+					decimalPlaces: 4,
+					duration: 2000,
+				});
+			});
+		</script>
+	</body>
+
+</html>
