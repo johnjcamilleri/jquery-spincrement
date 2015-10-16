@@ -24,3 +24,10 @@ $('#selector').spincrement(options)
 | easing            | 'spincrementEasing' | Function ... |
 | fade              | true    | Use fade effect |
 | complete          | null    | Callback function called when animation is done |
+
+
+## TO DO
+
+- Detect number of decimal places automatically
+- Detect thousand separators in start value
+- Check easing function
