@@ -1,30 +1,43 @@
 <html>
-	<head>
-		<title>jq-spincrement demo</title>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="jquery.spincrement.js"></script>
-		<style type="text/css">
-			.spincrement { display: inline-block; background-color: lemonchiffon; padding: .5em; text-align: center;  }
-		</style>
-	</head>
-	<body>
-		<h1>jq-spincrement demo</h1>
-		Spinners:
-			<div class="spincrement">95</div>&nbsp;
-			<div class="spincrement">16060606</div>&nbsp;
-			<div class="spincrement">1.56</div>&nbsp;
-			<div class="spincrement">0.4956</div>&nbsp;
-			<div class="spincrement">-2.35</div>&nbsp;
-		
-		<script type="text/javascript">
-			$(document).ready(function (){
-				$('.spincrement').spincrement({
-					from: 0.0,
-					decimalPlaces: 4,
-					duration: 2000,
-				});
-			});
-		</script>
-	</body>
-
+  <head>
+    <title>jquery-spincrement demo</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="jquery.spincrement.js"></script>
+    <style type="text/css">
+      .spincrement {
+        display: inline-block;
+        background-color: lemonchiffon;
+        padding: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>jquery-spincrement demo</h1>
+    <div>
+      <button id="btn">Spin!</button>
+    </div>
+    <div>
+      Simple: <span class="spincrement">95</span> <br>
+      Thousands, longer duration: <span class="spincrement">16,060,606</span> <br>
+      Decimal places, from non-zero: <span class="spincrement">1.56</span> <br>
+      Negative, with callback: <span class="spincrement">-2.35</span> <br>
+    </div>
+    <script type="text/javascript">
+      $('#btn').click(function (){
+        $('.spincrement:eq(0)').spincrement()
+        $('.spincrement:eq(1)').spincrement({
+          duration: 5000,
+        })
+        $('.spincrement:eq(2)').spincrement({
+          from: -1.5,
+          decimalPlaces: 4,
+        })
+        $('.spincrement:eq(3)').spincrement({
+          complete: function (e) {
+            e.text( e.text() + " ok ")
+          }
+        })
+      })
+    </script>
+  </body>
 </html>
