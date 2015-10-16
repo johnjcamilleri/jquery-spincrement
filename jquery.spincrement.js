@@ -7,7 +7,7 @@
  * Thousands separator code: http://www.webmasterworld.com/forum91/8.htm
  *
  * @author John J. Camilleri
- * @version 1.0
+ * @version 1.1
  */
 
 /* global jQuery */
@@ -26,8 +26,8 @@
     // Default values
     var defaults = {
       from: 0,
-      to: false,
-      decimalPlaces: 0,
+      to: null,
+      decimalPlaces: null,
       decimalPoint: '.',
       thousandSeparator: ',',
       duration: 1000, // ms; TOTAL length animation
@@ -40,11 +40,11 @@
 
     // Function for formatting number
     var re_thouSep = new RegExp(/^(-?[0-9]+)([0-9]{3})/)
-    function format (num) {
-      num = num.toFixed(options.decimalPlaces) // converts to string!
+    function format (num, dp) {
+      num = num.toFixed(dp) // converts to string!
 
       // Non "." decimal point
-      if ((options.decimalPlaces > 0) && (options.decimalPoint !== '.')) {
+      if ((dp > 0) && (options.decimalPoint !== '.')) {
         num = num.replace('.', options.decimalPoint)
       }
 
@@ -64,12 +64,26 @@
 
       // Set params FOR THIS ELEM
       var from = options.from
-      var to = (options.to !== false) ? options.to : parseFloat(obj.html()) // If no to is set, get value from elem itself
-      // var to = parseFloat(obj.html()); // If no to is set, get value from elem itself
+      var to
+      if (options.to !== null) {
+        to = options.to
+      } else {
+        var re = new RegExp(options.thousandSeparator, 'g')
+        to = parseFloat(obj.text().replace(re, ''))
+      }
+
       var duration = options.duration
       if (options.leeway) {
         // If leeway is set, randomise duration a little
         duration += Math.round(options.duration * ((Math.random() * 2) - 1) * options.leeway / 100)
+      }
+
+      var dp
+      if (options.decimalPlaces !== null) {
+        dp = options.decimalPlaces
+      } else {
+        var ix = obj.text().indexOf(options.decimalPoint)
+        dp = (ix > -1) ? obj.text().length - (ix + 1) : 0
       }
 
       // Start
@@ -87,12 +101,12 @@
           // Invoke the callback for each step.
           step: function (progress) {
             obj.css('visibility', 'visible') // Make sure it's visible
-            obj.html(format(progress * to))
+            obj.html(format(progress * to, dp))
           },
           complete: function () {
             // Cleanup
             obj.css('counter', null)
-            obj.html(format(to))
+            obj.html(format(to, dp))
 
             // user's callback
             if (options.complete) {

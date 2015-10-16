@@ -14,9 +14,9 @@ $('#selector').spincrement(options)
 
 | Name              | Default | Description |
 |-------------------|---------|-------------|
-| from              | 0       |             |
-| to                | false   |             |
-| decimalPlaces     | 0       |             |
+| from              | 0       | Start from this number |
+| to                | null    | Count to this number. When null, use contents of element. |
+| decimalPlaces     | null    | How many decimal places. When null, determine from contents of element. |
 | decimalPoint      | '.'     |             |
 | thousandSeparator | ','     |             |
 | duration          | 1000    | Total length of animation (ms) |
@@ -28,6 +28,4 @@ $('#selector').spincrement(options)
 
 ## TO DO
 
-- Detect number of decimal places automatically
-- Detect thousand separators in start value
 - Check easing function
