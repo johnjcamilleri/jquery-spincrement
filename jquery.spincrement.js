@@ -7,7 +7,7 @@
  * Thousands separator code: http://www.webmasterworld.com/forum91/8.htm
  *
  * @author John J. Camilleri
- * @version 1.1
+ * @version 1.2
  */
 
 /* global jQuery */
@@ -64,8 +64,14 @@
 
       // Set params FOR THIS ELEM
       var from = options.from
+      if (obj.attr('data-from')) {
+        from = parseFloat(obj.attr('data-from'))
+      }
+
       var to
-      if (options.to !== null) {
+      if (obj.attr('data-to')) {
+        to = parseFloat(obj.attr('data-to'))
+      } else if (options.to !== null) {
         to = options.to
       } else {
         var re = new RegExp(options.thousandSeparator, 'g')
@@ -79,7 +85,9 @@
       }
 
       var dp
-      if (options.decimalPlaces !== null) {
+      if (obj.attr('data-dp')) {
+        dp = parseInt(obj.attr('data-dp'), 10)
+      } else if (options.decimalPlaces !== null) {
         dp = options.decimalPlaces
       } else {
         var ix = obj.text().indexOf(options.decimalPoint)
@@ -100,7 +108,6 @@
 
           // Invoke the callback for each step.
           step: function (progress) {
-            obj.css('visibility', 'visible') // Make sure it's visible
             obj.html(format(progress * to, dp))
           },
           complete: function () {

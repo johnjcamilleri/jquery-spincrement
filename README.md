@@ -12,6 +12,19 @@ $('#selector').spincrement(options)
 
 ## Options
 
+### HTML Attributes
+
+Some things can be set at HTML attributes.
+These take precedence over the JavaScript options.
+
+| Attribute         | Description |
+|-------------------|-------------|
+| data-from         | Start from this number |
+| data-to           | Count to this number |
+| data-dp           | Decimal places |
+
+### JavaScript options
+
 | Name              | Default | Description |
 |-------------------|---------|-------------|
 | from              | 0       | Start from this number |

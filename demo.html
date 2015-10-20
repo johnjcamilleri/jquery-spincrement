@@ -21,6 +21,7 @@
       Thousands, override decimals: <span class="spincrement">16,060,606</span> <br>
       Inferred decimal places, from non-zero: <span class="spincrement">1.56</span> <br>
       Negative, with callback: <span class="spincrement">-2.35</span> <br>
+      HTML attributes: <span class="spincrement" data-from="0" data-to="123" data-dp="1">...</span> <br>
     </div>
     <script type="text/javascript">
       $('#btn').click(function (){
@@ -36,6 +37,7 @@
             e.text( e.text() + " ok ")
           }
         })
+        $('.spincrement:eq(4)').spincrement()
       })
     </script>
   </body>
