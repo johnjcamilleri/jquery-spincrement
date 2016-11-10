@@ -74,7 +74,8 @@
       } else if (options.to !== null) {
         to = options.to
       } else {
-        var re = new RegExp(options.thousandSeparator, 'g')
+        var ts = $.inArray(options.thousandSeparator, ['\\', '^', '$', '*', '+', '?', '.']) > -1 ? '\\' + options.thousandSeparator : options.thousandSeparator
+        var re = new RegExp(ts, 'g')
         to = parseFloat(obj.text().replace(re, ''))
       }
 
